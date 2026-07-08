@@ -9,7 +9,7 @@ import CardPrices from './pages/CardPrices'
 import UpperLower from './pages/UpperLower'
 import Estimate from './pages/Estimate'
 import UpperLowerEndless from './pages/UpperLowerEndless'
-import Squirtle from './pages/Squirtle'
+import Cardle from './pages/Cardle'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,7 +21,7 @@ function App() {
         <Route path="/upper-lower" element={<UpperLower />} />
         <Route path="/estimate" element={<Estimate />} />
         <Route path="/upper-lower-endless" element={<UpperLowerEndless />} />
-        <Route path="/squirtle" element={<Squirtle />} />
+        <Route path="/cardle" element={<Cardle />} />
       </Routes>
     </BrowserRouter>
   )

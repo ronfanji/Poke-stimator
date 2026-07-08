@@ -84,7 +84,8 @@ function CardPrices() {
       <div className='col-6 image p-5'>
         <ul className = 'd-flex list-unstyled gap-3 m-0 mb-4'>
           <StyledButton onClick={() => navigate("/")}>Home</StyledButton>
-          <button onClick={()=>updateToggle(2)}>X&Y</button>
+          <button onClick={()=>updateToggle(1)}>Black & White</button>
+          <button onClick={()=>updateToggle(2)}>X & Y</button>
           <button onClick={()=>updateToggle(3)}>Sun & Moon</button>
           <button onClick={()=>updateToggle(4)}>Sword & Shield</button>
           <button onClick={()=>updateToggle(5)}>Scarlet & Violet</button>

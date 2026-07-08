@@ -9,7 +9,7 @@ function Home() {
       <div>
         <h1>Poké-stimator</h1>
         <section>
-          Welcome to the trade, fellow collector! Here, we provide trials to test your ability to gauge and estimate Pokemon prices.
+          Welcome to the trade, fellow collector! Here, we provide trials to test your ability to gauge and estimate Pokemon prices. 
         </section>
         
         <button onClick={() => navigate('/card-prices')}>
@@ -24,8 +24,8 @@ function Home() {
         <button onClick={() => navigate('/estimate')}>
           Trade Estimation
         </button>
-        <button onClick={() => navigate('/squirtle')}>
-          Squirtle
+        <button onClick={() => navigate('/cardle')}>
+          Cardle
         </button>
       </div>
     )

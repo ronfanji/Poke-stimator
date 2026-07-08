@@ -7,7 +7,7 @@ import os
 load_dotenv()
 
 SUPABASE_URL = os.environ.get("VITE_SUPABASE_URL")
-SUPABASE_KEY = os.environ.get("VITE_SUPABASE_ANON_KEY")
+SUPABASE_KEY = os.environ.get("VITE_SUPABASE_SECRET_KEY")
 
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
@@ -76,7 +76,6 @@ def fetch_singles(set_params, era, era_num, set_num=-1, keywords=[], set_name = 
         
         if has_keyword: 
             continue
-
         all_rows.append({
             'id': card['tcgPlayerId'],
             "name": card['name'],
@@ -85,7 +84,11 @@ def fetch_singles(set_params, era, era_num, set_num=-1, keywords=[], set_name = 
             'set_num': set_num,
             'image': card['imageCdnUrl400'],
             'era': era,
-            'era_num': era_num
+            'era_num': era_num,
+            'rarity': card['rarity'],
+            'artist': card['artist'],
+            'type': card['pokemonType'],
+            'cardNumber': card['cardNumber'].split("/")[0]
         })
 
 def fetch_etbs(etb_params, set_num=0):
@@ -160,10 +163,38 @@ def fetch_and_reset():
 
     # ---------------------------------------  BLACK & WHITE   ---------------------------------------
 
+    blackwhitebase_set_params = {
+        "set": "Black and White",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 3
+    }
 
+
+    legendarytreasures_set_params = {
+            "set": "Legendary Treasures",
+            "sortBy": "price",
+            "sortOrder": "desc",
+            "limit": 10
+        }
+
+    legendarytreasuresRC_set_params = {
+            "set": "Legendary Treasures: Radiant Collection",
+            "sortBy": "price",
+            "sortOrder": "desc",
+            "limit": 18
+        }
+
+    fetch_singles(blackwhitebase_set_params, "Black & White", era_num=1, set_num=0, keywords=[], set_name="Black & White")
+
+
+    fetch_singles(legendarytreasures_set_params, "Black & White", era_num=1, set_num=11, keywords=[], set_name="Legendary Treasures")
+    fetch_singles(legendarytreasuresRC_set_params, "Black & White", era_num=1, set_num=11, keywords=[], set_name="Legendary Treasures")
 
     # ---------------------------------------      X & Y       ---------------------------------------
     
+    time.sleep(5)
+
     xybase_set_params = {
         "set": "XY Base Set",
         "sortBy": "price",
@@ -179,9 +210,19 @@ def fetch_and_reset():
         "limit": 15
     }   
 
+
+    xyevolutions_set_params = {
+        "set": "XY - Evolutions",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 24
+    }
+
     time.sleep(5)
     fetch_singles(xybase_set_params, "X & Y", era_num=2, set_num=0, keywords=["Code Card"], set_name="X & Y")
     fetch_singles(flashfire_set_params, "X & Y", era_num=2, set_num=1)
+
+    fetch_singles(xyevolutions_set_params, "X & Y", era_num=2, set_num=13, keywords=["Code Card"], set_name="XY Evolutions")
 
     # ---------------------------------------    SUN & MOON    ---------------------------------------
 
@@ -460,8 +501,15 @@ def fetch_and_reset():
 
     # PROMOS
 
+    blackwhitepromo_set_params = {
+        "set": "Black and White Promo",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 77
+    }
+
     xypromo_set_params = {
-        "set": "XY promos",
+        "set": "XY promo",
         "sortBy": "price",
         "sortOrder": "desc",
         "limit": 100,
@@ -497,6 +545,7 @@ def fetch_and_reset():
 
 
     time.sleep(10)
+    fetch_singles(blackwhitepromo_set_params, "Black & White", era_num=1, set_num=100, keywords=["Staff", "Worlds", "Prerelease", "Battle Road"])
     fetch_singles(xypromo_set_params, "X & Y", 2, 100, ["Prerelease", "World Championship", "Staff", "Champions Festival"])
     fetch_singles(sunmoonpromo_set_params, "Sun & Moon", 3, 100, ["Prerelease", "World Championship", "Staff"])
     fetch_singles(swordshieldpromo_set_params, "Sword & Shield", 4, 100, ["Prerelease", "World Championships", "Staff"])
@@ -612,17 +661,37 @@ def fetch_and_reset():
 fetch_and_reset()
 
 '''
-megaevolutionpromo_set_params = {
-    "set": "Mega Evolution Promo",
+blackwhitepromo_set_params = {
+    "set": "Black and White Promo",
     "sortBy": "price",
     "sortOrder": "desc",
-    "limit": 67
+    "limit": 77
 }
 
-fetch_singles(megaevolutionpromo_set_params, "Mega Evolution", era_num=2, set_num=0, keywords=["Staff", "Celebratory Fanfare"], set_name="Mega Evolution Promo")
-
+fetch_singles(blackwhitepromo_set_params, "Black & White", era_num=1, set_num=100, keywords=["Staff", "Worlds", "Prerelease", "Battle Road"])
 
 for row in all_rows:
     print(row['name'], row['price'])
+
+
+cz_set_params = {
+        "set": "Crown Zenith",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 20            
+    }
+
+ascendedheroes_set_params = {
+        "set": "Ascended Heroes",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 20              
+    }
+
+fetch_singles(cz_set_params, "Mega Evolution", era_num=2, set_num=0, keywords=["Staff", "Celebratory Fanfare"], set_name="Mega Evolution Promo")
+fetch_singles(ascendedheroes_set_params, "Mega Evolution", era_num=2, set_num=0, keywords=["Staff", "Celebratory Fanfare"], set_name="Mega Evolution Promo")
+
+for row in all_rows:
+    print(row['name'], row['rarity'], row['artist'], row['type'], row['cardNumber'])
 
 '''
