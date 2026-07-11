@@ -3,10 +3,12 @@ import { useState, useEffect, useRef } from 'react'
 import { getHints } from '../utils/wordleLogic'
 import HintRow, { HintHeaders } from '../components/HintRow'
 import { useCardDataCardle } from '../hooks/useCardData'
+import { useNavigate } from 'react-router-dom'
 
-const MAX_GUESSES = 8
+const MAX_GUESSES = 10
 
 function CardWordle() {
+  const navigate = useNavigate()
   const {allCards} = useCardDataCardle()
   const [input, setInput] = useState('')
   const [filtered, setFiltered] = useState([])
@@ -17,7 +19,6 @@ function CardWordle() {
   const [gameOver, setGameOver] = useState(false)
   const [won, setWon] = useState(false)
   const dropdownRef = useRef(null)
-
 
   useEffect(() => {
     if (allCards.length > 0 && !targetCard) {
@@ -30,7 +31,11 @@ function CardWordle() {
   useEffect(() => {
     if (input.length < 2) { setFiltered([]); return }
     const results = allCards
-      .filter(card => card.name.toLowerCase().includes(input.toLowerCase()))
+      .filter(card => 
+        card.name.toLowerCase().includes(input.toLowerCase()) ||
+        card.set.toLowerCase().includes(input.toLowerCase()) || // also search by set
+        (card.artist?.toLowerCase() ?? '').includes(input.toLowerCase())  // safe null check
+      )
       .slice(0, 10)
     setFiltered(results)
   }, [input, allCards])
@@ -72,12 +77,17 @@ function CardWordle() {
   }
 
   return (
-    <div className="flex flex-col items-center p-8 gap-6 min-h-screen bg-gray-900 text-white">
-      <h1 className="text-3xl font-bold text-white">CARDLE</h1>
-      <p className="text-gray-400">Guess the mystery card in {MAX_GUESSES} tries</p>
+    <div className="flex flex-col items-center p-8 gap-6 min-h-screen bg-white text-black">
+      <div className="flex items-baseline gap-4 w-full">
+        <p className="text-4xl font-bold text-black">CARDLE</p>
+        <p className="text-xl text-gray-500">Guess the mystery card in {MAX_GUESSES} tries</p>
+        <div className="ml-auto flex gap-4">
+          <button onClick={() => navigate('/')}>Home</button>
+        </div>
+      </div>
 
       {/* Color legend */}
-      <div className="flex gap-4 text-sm text-gray-400">
+      <div className="flex gap-4 text-sm text-gray-700">
         <span><span className="inline-block w-3 h-3 bg-green-500 rounded mr-1"/>Correct</span>
         <span><span className="inline-block w-3 h-3 bg-yellow-500 rounded mr-1"/>Close</span>
         <span><span className="inline-block w-3 h-3 bg-red-600 rounded mr-1"/>Wrong</span>
@@ -100,8 +110,8 @@ function CardWordle() {
             type="text"
             value={input}
             onChange={e => { setInput(e.target.value); setSelectedCard(null) }}
-            placeholder="Search for a card..."
-            className="border-2 border-gray-400 rounded-lg px-3 py-2 bg-transparent text-white outline-none focus:border-blue-400"
+            placeholder="Search for a card, set, or artist..."
+            className="border-2 border-gray-400 rounded-lg px-3 py-2 bg-transparent text-black outline-none focus:border-blue-400"
           />
 
           {filtered.length > 0 && (

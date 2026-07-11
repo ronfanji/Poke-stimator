@@ -164,27 +164,40 @@ export function useCardDataByPriceRange(startPrice, endPrice) {
   return { productSorted, pricesSorted, imagesSorted, size: productSorted.length, loading }
 }
 
-
+// added pagination because SupaBase only goes to 1000
 export function useCardDataCardle() {
   const [allCards, setAllCards] = useState([])
 
   useEffect(() => {
     async function fetchCards() {
-      const { data, error } = await supabase
-        .from('card_prices')
-        .select('*')
-        .neq('era_num', 100)
-      
-      if (error) {
-        console.error(error)
+      let allData = []
+      let from = 0
+      const batchSize = 1000
+
+      while (true) {
+        const { data, error } = await supabase
+          .from('card_prices')
+          .select('*')
+          .neq('era_num', 100)
+          .range(from, from + batchSize - 1)
+
+        if (error) {
+          console.error(error)
+          break
+        }
+
+        allData = [...allData, ...data]
+
+        if (data.length < batchSize) break
+        from += batchSize
       }
-      
-      if(data){
-        setAllCards(data)
-      }
+
+      console.log('Total cardle cards fetched:', allData.length)
+      setAllCards(allData)
     }
-    
+
     fetchCards()
   }, [])
-  return {allCards}
+
+  return { allCards }
 }

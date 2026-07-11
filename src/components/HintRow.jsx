@@ -19,10 +19,11 @@ export function HintHeaders() {
     { label: 'Name',        width: '195px' },
     { label: 'Era',         width: '112px' },
     { label: 'Set',         width: '176px' },
+    { label: 'Set Num',     width: '60px' },
     { label: 'Price',       width: '96px'  },
-    { label: 'Card Number', width: '96px' },
+    { label: 'Card Number', width: '80px' },
     { label: 'Rarity',      width: '128px' },
-    { label: 'Type',        width: '120px'  },
+    { label: 'Type',        width: '96px'  },
   ]
 
   return (
@@ -32,7 +33,7 @@ export function HintHeaders() {
         <div 
           key={label} 
           style={{ width, minWidth: width, maxWidth: width }}
-          className="text-center text-xs text-gray-400 font-bold overflow-hidden"
+          className="text-center text-xs text-gray-700 font-bold overflow-hidden"
         >
           {label}
         </div>
@@ -55,10 +56,11 @@ function HintRow({ guess, hints }) {
       <HintCell value={hints.name.value}    status={hints.name.status}  width="192px"/>
       <HintCell value={hints.era.value}     status={hints.era.status} width="112px"/>
       <HintCell value={hints.set.value}     status={hints.set.status} width="176px"/>
+      <HintCell value={hints.set_num.value} status={hints.set_num.status} arrow={hints.set_num.arrow} width="60px"/>
       <HintCell value={hints.price.value}   status={hints.price.status} width="96px"  arrow={hints.price.arrow} />
-      <HintCell value={hints.cardNumber.value} status={hints.cardNumber.status} width="96px"  arrow={hints.cardNumber.arrow} />
+      <HintCell value={hints.cardNumber.value} status={hints.cardNumber.status} width="80px"  arrow={hints.cardNumber.arrow} />
       <HintCell value={hints.rarity.value}     status={hints.rarity.status} width="128px"/>
-      <HintCell value={hints.type.value}     status={hints.type.status} width="120px" />
+      <HintCell value={hints.type.value}     status={hints.type.status} width="96px" />
 
     </div>
   )

@@ -1,5 +1,38 @@
 // src/utils/wordleLogic.js
 
+// cards whose types are weak/strong against are considered close
+const type_strengths= {
+  'Fire':     ['Grass', 'Bug', 'Ice', 'Steel'],        
+  'Water':    ['Fire', 'Ground', 'Rock'],       
+  'Grass':    ['Water', 'Ground', 'Rock'],       
+  'Electric': ['Water', 'Flying'],               
+  'Psychic':  ['Fighting', 'Poison'],          
+  'Fighting': ['Normal', 'Ice', 'Dark', 'Rock', 'Steel'],
+  'Dark':     ['Psychic', 'Ghost'],
+  'Steel':    ['Ice', 'Rock', 'Fairy'],
+  'Fairy':    ['Fighting', 'Dragon', 'Dark'],
+  'Dragon':   ['Dragon'],
+  'Ghost':    ['Psychic', 'Ghost'],
+  'Ice':      ['Grass', 'Flying', 'Dragon', 'Ground'],
+  'Ground':   ['Fire', 'Electric', 'Poison', 'Rock', 'Steel'],
+  'Flying':   ['Grass', 'Fighting', 'Bug'],
+  'Rock':     ['Fire', 'Flying', 'Bug', 'Ice'],
+  'Poison':   ['Grass', 'Fairy'],
+  'Bug':      ['Grass', 'Psychic', 'Dark'],
+  'Normal':   [],
+}
+
+function typesAreClose(guessEnergy, targetEnergy) {
+  if (!guessEnergy || !targetEnergy) return false
+  
+  const guessClose = type_strengths[guessEnergy] ?? []
+  const targetClose = type_strengths[targetEnergy] ?? []
+
+  // check if guess type is a strength or weakness against target type
+  return guessClose.includes(targetEnergy) || targetClose.includes(guessEnergy)
+}
+
+
 export function getHints(guess, target) {
     return {
       name: {
@@ -8,10 +41,12 @@ export function getHints(guess, target) {
       },
       set: {
         value: guess.set,
-        status: guess.set === target.set ? 'correct' 
-        : Math.abs(guess.set_num - target.set_num) <= 2
-          ? 'close'
-          : 'wrong',
+        status: guess.set === target.set ? 'correct' : 'wrong',
+      },
+      set_num: {
+        value: guess.set_num,
+        status: guess.set_num === target.set_num ? 'correct'
+                : Math.abs(guess.set_num - target.set_num) <= 2 ? 'close' : 'wrong',
         arrow: guess.set_num < target.set_num ? '⬆️' : guess.set_num > target.set_num ? '⬇️' : null
       },
       era: {
@@ -68,8 +103,12 @@ export function getHints(guess, target) {
         })()
       },
       type: {
-        value: guess.type,
-        status: guess.type === target.type ? 'correct' : 'wrong'
+        value: guess.type ?? 'None',
+        status: (() => {
+          if(guess.type === target.type) return 'correct'
+          if(typesAreClose(guess.type, target.type)) return 'close'
+          return 'wrong' 
+        })()
       }
 
 

@@ -208,8 +208,41 @@ def fetch_and_reset():
         "sortBy": "price",
         "sortOrder": "desc",
         "limit": 15
+    }  
+    furiousfists_set_params = {
+        "set": "Furious Fists",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 14
     }   
 
+    doublecrisis_set_params = {
+        "set": "Double Crisis",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 2
+    }   
+
+    primalclash_set_params = {
+        "set": "Primal Clash",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 23
+    }   
+
+    phantomforces_set_params = {
+        "set": "Phantom Forces",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 10
+    }   
+
+    roaringskies_set_params = {
+        "set": "Roaring Skies",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 15
+    }   
 
     xyevolutions_set_params = {
         "set": "XY - Evolutions",
@@ -221,6 +254,13 @@ def fetch_and_reset():
     time.sleep(5)
     fetch_singles(xybase_set_params, "X & Y", era_num=2, set_num=0, keywords=["Code Card"], set_name="X & Y")
     fetch_singles(flashfire_set_params, "X & Y", era_num=2, set_num=1)
+    fetch_singles(furiousfists_set_params, "X & Y", era_num=2, set_num=2) 
+    fetch_singles(phantomforces_set_params, "X & Y", era_num=2, set_num=3)
+    fetch_singles(primalclash_set_params, "X & Y", era_num=2, set_num=4)
+
+    time.sleep(5)
+    fetch_singles(doublecrisis_set_params, "X & Y", era_num=2, set_num=5)
+    fetch_singles(roaringskies_set_params, "X & Y", era_num=2, set_num=6)
 
     fetch_singles(xyevolutions_set_params, "X & Y", era_num=2, set_num=13, keywords=["Code Card"], set_name="XY Evolutions")
 
@@ -255,6 +295,20 @@ def fetch_and_reset():
         "limit": 39
     }
 
+    hiddenfates_set_params = {
+        "set": "Hidden Fates",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 5
+    }
+
+    hiddenfatesvault_set_params = {
+        "set": "Hidden Fates: Shiny Vault",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 50
+    }
+
     cosmiceclipse_set_params = {
         "set": "Cosmic Eclipse",
         "sortBy": "price",
@@ -268,10 +322,13 @@ def fetch_and_reset():
 
 
     fetch_singles(teamup_set_params, "Sun & Moon", era_num=3, set_num=10)
-
+    
     fetch_singles(unbrokenbonds_set_params, "Sun & Moon", era_num=3, set_num=12)
     fetch_singles(unifiedminds_set_params, "Sun & Moon", era_num=3, set_num=13)
 
+    time.sleep(5)
+    fetch_singles(hiddenfates_set_params, "Sun & Moon", era_num=3, set_num=14, set_name="Hidden Fates")
+    fetch_singles(hiddenfatesvault_set_params, "Sun & Moon", era_num=3, set_num=14, set_name="Hidden Fates")
     fetch_singles(cosmiceclipse_set_params, "Sun & Moon", era_num=3, set_num=15)
 
     # --------------------------------------- SWORD AND SHIELD ---------------------------------------
@@ -281,6 +338,13 @@ def fetch_and_reset():
         "sortBy": "price",
         "sortOrder": "desc",
         "limit": 19
+    }
+
+    championspath_set_params = {
+        "set": "Champion's Path",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 3    
     }
 
     shiningfates_set_params = {
@@ -345,7 +409,7 @@ def fetch_and_reset():
         "set": "Evolving Skies",
         "sortBy": "price",
         "sortOrder": "desc",
-        "limit": 15              
+        "limit": 40         
     }
 
     lostorigin_set_params = {
@@ -362,11 +426,23 @@ def fetch_and_reset():
         "limit": 75            
     }
 
+    vividvoltage_set_params = {
+        "set": "Vivid Voltage",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 15            
+    }
+
     time.sleep(10)
     fetch_singles(swordshieldbase_set_params, "Sword & Shield", era_num=4, set_num=0, set_name="Sword & Shield")
 
+    fetch_singles(championspath_set_params, "Sword & Shield", era_num=4, set_num=3)
+    fetch_singles(vividvoltage_set_params, "Sword & Shield", era_num=4, set_num=4)
     fetch_singles(shiningfates_set_params, "Sword & Shield", era_num=4, set_num=5, set_name="Shining Fates")
     fetch_singles(shiningfatesvault_set_params, "Sword & Shield", era_num=4, set_num=5, set_name="Shining Fates")
+    
+    time.sleep(10)
+
     fetch_singles(battlestyles_set_params, "Sword & Shield", era_num=4, set_num=6)
     fetch_singles(chillingreign_set_params, "Sword & Shield", era_num=4, set_num=7)
     fetch_singles(evolvingskies_set_params, "Sword & Shield", era_num=4, set_num=8)
@@ -374,6 +450,7 @@ def fetch_and_reset():
     fetch_singles(brilliantstars_set_params, "Sword & Shield", era_num=4, set_num=10)
     fetch_singles(astralradiance_set_params, "Sword & Shield", era_num=4, set_num=11)
 
+    time.sleep(10)
     fetch_singles(lostorigin_set_params, "Sword & Shield", era_num=4, set_num=13)
     fetch_singles(silvertempest_set_params, "Sword & Shield", era_num=4, set_num=14)
     fetch_singles(cz_set_params, "Sword & Shield", era_num=4, set_num=15, keywords=["Energy"])
@@ -494,10 +571,10 @@ def fetch_and_reset():
     }
 
     time.sleep(10)
-    fetch_singles(megaevolution_set_params, "Mega Evolutions", 6, 0, set_name="Mega Evolution")
-    fetch_singles(phantasmalflames_set_params, "Mega Evolutions", 6, 1)
-    fetch_singles(ascendedheroes_set_params, "Mega Evolutions", 6, 2)
-    fetch_singles(perfectorder_set_params, "Mega Evolutions", 6, 3)
+    fetch_singles(megaevolution_set_params, "Mega Evolution", 6, 0, set_name="Mega Evolution")
+    fetch_singles(phantasmalflames_set_params, "Mega Evolution", 6, 1)
+    fetch_singles(ascendedheroes_set_params, "Mega Evolution", 6, 2)
+    fetch_singles(perfectorder_set_params, "Mega Evolution", 6, 3)
 
     # PROMOS
 
@@ -661,18 +738,18 @@ def fetch_and_reset():
 fetch_and_reset()
 
 '''
-blackwhitepromo_set_params = {
-    "set": "Black and White Promo",
+roaringskies_set_params = {
+    "set": "Roaring Skies",
     "sortBy": "price",
     "sortOrder": "desc",
-    "limit": 77
-}
+    "limit": 15
+}   
 
-fetch_singles(blackwhitepromo_set_params, "Black & White", era_num=1, set_num=100, keywords=["Staff", "Worlds", "Prerelease", "Battle Road"])
+fetch_singles(roaringskies_set_params, "X & Y", era_num=2, set_num=1)
+
 
 for row in all_rows:
     print(row['name'], row['price'])
-
 
 cz_set_params = {
         "set": "Crown Zenith",
