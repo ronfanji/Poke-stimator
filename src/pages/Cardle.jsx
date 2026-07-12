@@ -36,7 +36,7 @@ function CardWordle() {
         card.set.toLowerCase().includes(input.toLowerCase()) || // also search by set
         (card.artist?.toLowerCase() ?? '').includes(input.toLowerCase())  // safe null check
       )
-      .slice(0, 10)
+      .sort((a, b) => b.price - a.price)  // highest price first
     setFiltered(results)
   }, [input, allCards])
 
