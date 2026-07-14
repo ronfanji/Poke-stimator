@@ -76,7 +76,8 @@ def fetch_singles(set_params, era, era_num, set_num=-1, keywords=[], set_name = 
         
         if has_keyword: 
             continue
-        all_rows.append({
+            
+        card_dict = {
             'id': card['tcgPlayerId'],
             "name": card['name'],
             'price': card['prices']['market'],
@@ -88,8 +89,18 @@ def fetch_singles(set_params, era, era_num, set_num=-1, keywords=[], set_name = 
             'rarity': card['rarity'],
             'artist': card['artist'],
             'type': card['pokemonType'],
-            'cardNumber': card['cardNumber'].split("/")[0]
-        })
+            'cardNumber': card['cardNumber'].split("/")[0],
+        }
+        
+        if('ebay' in card.keys() and 'salesByGrade' in card['ebay'] and 'psa10' in card['ebay']['salesByGrade']):
+            card_price = card['ebay']['salesByGrade']['psa10']['marketPrice7Day']
+
+            # check if there even is a cardPrice for this card
+            # only include this psa10 price if the psa10 is more than $100 (else, not worth it)
+            if(card_price != None and card_price > 150):
+                card_dict['psa10'] = round(card_price, 2)
+
+        all_rows.append(card_dict)
 
 def fetch_etbs(etb_params, set_num=0):
     time.sleep(0.5)
@@ -199,7 +210,8 @@ def fetch_and_reset():
         "set": "XY Base Set",
         "sortBy": "price",
         "sortOrder": "desc",
-        "limit": 16
+        "limit": 16,
+        "includeEbay": "true"
     }
 
 
@@ -457,6 +469,22 @@ def fetch_and_reset():
 
     # SCARLET & VIOLET
 
+    paldeaevolved_set_params = {
+        "set": "Paldea Evolved",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 57,
+        "includeEbay": "true"
+    }
+
+    obsidianflames_set_params = {
+        "set": "Obsidian Flames",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 19,
+        "includeEbay": "true"
+    }
+
     surgingsparks_set_params = {
         "set": "Surging Sparks",
         "sortBy": "price",
@@ -520,17 +548,26 @@ def fetch_and_reset():
         "limit": 27
     }
 
+    stellarcrown_set_params = {
+        "set": "Stellar Crown",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 28,
+        "includeEbay": "true"
+    }
+
     time.sleep(10)
     fetch_singles(scarletvioletbase_set_params, "Scarlet & Violet", era_num=5, set_num=0, set_name="Scarlet & Violet")
-
-
+    fetch_singles(paldeaevolved_set_params, "Scarlet & Violet", era_num=5, set_num=1)
+    fetch_singles(obsidianflames_set_params, "Scarlet & Violet", era_num=5, set_num=2)
     fetch_singles(SV151_set_params, "Scarlet & Violet", 5, 3, ["Metal", "Code Card"])
 
     fetch_singles(paldeanfates_set_params, "Scarlet & Violet", 5, 5)
 
 
 
-    time.sleep(10)    
+    time.sleep(10)
+    fetch_singles(stellarcrown_set_params, "Scarlet & Violet", era_num=5, set_num=9)    
     fetch_singles(surgingsparks_set_params, "Scarlet & Violet", 5, 10)
     fetch_singles(prismatic_set_params, "Scarlet & Violet", 5, 11)
     fetch_singles(journeytogether_set_params, "Scarlet & Violet", 5, 12)
@@ -738,18 +775,44 @@ def fetch_and_reset():
 fetch_and_reset()
 
 '''
-roaringskies_set_params = {
-    "set": "Roaring Skies",
+paldeaevolved_set_params = {
+    "set": "Paldea Evolved",
     "sortBy": "price",
     "sortOrder": "desc",
-    "limit": 15
-}   
+    "limit": 57,
+    "includeEbay": "true"
+}
 
-fetch_singles(roaringskies_set_params, "X & Y", era_num=2, set_num=1)
+response = make_request(singles_url, headers, paldeaevolved_set_params)
 
+data = response.json().get("data", [])
+for card in data:
+    print(card['ebay']['salesByGrade']['psa10'])
+    print(card['ebay']['salesByGrade']['psa10']['marketPrice7Day'])
+
+#fetch_singles(paldeaevolved_set_params, "Scarlet & Violet", era_num=5, set_num=0)
 
 for row in all_rows:
     print(row['name'], row['price'])
+    if('psa10' in row.keys()):
+        print(row['psa10'])
+
+prismatic_set_params = {
+    "set": "Prismatic Evolutions",
+    "sortBy": "price",
+    "sortOrder": "desc",
+    "limit": 1,
+    "includeEbay": "true"         
+}
+
+response = make_request(singles_url, headers, prismatic_set_params)
+
+data = response.json().get("data", [])
+for card in data:
+    print(card['ebay']['salesByGrade']['psa10']['marketPrice7Day'])
+    print(card['ebay']['salesByGrade']['psa9']['marketPrice7Day'])
+
+fetch_singles(prismatic_set_params, "Scarlet & Violet", 5, 11)
 
 cz_set_params = {
         "set": "Crown Zenith",
