@@ -524,7 +524,7 @@ def fetch_and_reset():
     fetch_singles(scarletvioletbase_set_params, "Scarlet & Violet", era_num=5, set_num=0, set_name="Scarlet & Violet")
 
 
-    fetch_singles(SV151_set_params, "Scarlet & Violet", 5, 3, ["Metal"])
+    fetch_singles(SV151_set_params, "Scarlet & Violet", 5, 3, ["Metal", "Code Card"])
 
     fetch_singles(paldeanfates_set_params, "Scarlet & Violet", 5, 5)
 
