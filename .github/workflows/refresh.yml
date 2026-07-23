@@ -1,0 +1,32 @@
+name: Refresh Pokemon Data
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'  # every 12 hours
+  workflow_dispatch:  # allows manual trigger from GitHub UI
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: pip install supabase requests python-dotenv
+
+      - name: Debug secrets
+        run: |
+          if [ -z "$VITE_SUPABASE_URL" ]; then echo "URL is empty"; else echo "URL is set"; fi
+          if [ -z "$VITE_SUPABASE_SECRET_KEY" ]; then echo "KEY is empty"; else echo "KEY is set"; fi
+          if [ -z "$API_KEY" ]; then echo "API_KEY is empty"; else echo "API_KEY is set"; fi
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          VITE_SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          API_KEY: ${{ secrets.API_KEY }}
+      
+      - run: python src/data_fetch.py  # update to your actual script path
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          VITE_SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          API_KEY: ${{ secrets.API_KEY }}
