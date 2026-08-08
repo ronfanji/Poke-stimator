@@ -35,7 +35,7 @@ function Home() {
 
       {/* Header */}
       <div className="flex items-center justify-between px-6 py-3 border-b border-gray-200">
-        <h1 className="text-4xl font-bold text-gray-900">Poké-stimator</h1>
+        <h1 className="text-4xl font-bold text-red-400">Poké-stimator</h1>
         <button
           onClick={() => navigate('/card-prices')}
           className="px-5 py-5 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm transition"
@@ -73,7 +73,7 @@ function Home() {
 
       {/* Footer */}
       <div className="text-center text-gray-400 text-sm pb-8">
-        Prices sourced from TCGPlayer — updated every 8 hours
+        Prices sourced from TCGPlayer via PokePriceTracker — updated every 8 hours through Github Actions
       </div>
 
     </div>

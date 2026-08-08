@@ -135,7 +135,7 @@ function CardWordle() {
           <button
             onClick={handleSubmit}
             disabled={!selectedCard}
-            className="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg transition"
+            className="bg-blue-500 hover:bg-blue-600 border border-gray-800 hover:border-gray-800 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-4 py-2 rounded transition"
           >
             Submit Guess ({guesses.length}/{MAX_GUESSES})
           </button>

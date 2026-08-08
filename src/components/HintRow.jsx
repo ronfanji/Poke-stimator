@@ -16,23 +16,23 @@ function HintCell({ value, status, arrow, width = "128px" }) {
 export function HintHeaders() {
 
   const headers = [
-    { label: 'Name',        width: '195px' },
-    { label: 'Era',         width: '112px' },
-    { label: 'Set',         width: '176px' },
-    { label: 'Set Num',     width: '60px' },
-    { label: 'Price',       width: '96px'  },
-    { label: 'Card Number', width: '80px' },
-    { label: 'Rarity',      width: '128px' },
-    { label: 'Type',        width: '96px'  },
+    { label: 'Name',        width: '13%' },
+    { label: 'Era',         width: '13.25%' },
+    { label: 'Set',         width: '16%' },
+    { label: 'Set Num',     width: '8%' },
+    { label: 'Price',       width: '12%'  },
+    { label: 'Card Number', width: '10%' },
+    { label: 'Rarity',      width: '12%' },
+    { label: 'Type',        width: '7%'  },
   ]
 
   return (
     <div className="flex gap-2 items-center mb-2 w-full">
-      <div style={{ width: '40px', minWidth: '40px' }} />
+      <div style={{ width: '40px', minWidth: '40px', flexShrink: 0 }} />
       {headers.map(({ label, width }) => (
         <div 
           key={label} 
-          style={{ width, minWidth: width, maxWidth: width }}
+          style={{ width, minWidth: width, maxWidth: width, flexShrink: 0 }}
           className="text-center text-xs text-gray-700 font-bold overflow-hidden"
         >
           {label}
@@ -53,14 +53,14 @@ function HintRow({ guess, hints }) {
       />
 
       {/* Hint cells */}
-      <HintCell value={hints.name.value}    status={hints.name.status}  width="192px"/>
-      <HintCell value={hints.era.value}     status={hints.era.status} width="112px"/>
-      <HintCell value={hints.set.value}     status={hints.set.status} width="176px"/>
-      <HintCell value={hints.set_num.value} status={hints.set_num.status} arrow={hints.set_num.arrow} width="60px"/>
-      <HintCell value={hints.price.value}   status={hints.price.status} width="96px"  arrow={hints.price.arrow} />
-      <HintCell value={hints.cardNumber.value} status={hints.cardNumber.status} width="80px"  arrow={hints.cardNumber.arrow} />
-      <HintCell value={hints.rarity.value}     status={hints.rarity.status} width="128px"/>
-      <HintCell value={hints.type.value}     status={hints.type.status} width="96px" />
+      <HintCell value={hints.name.value}    status={hints.name.status}  width="13%"/>
+      <HintCell value={hints.era.value}     status={hints.era.status} width="13%"/>
+      <HintCell value={hints.set.value}     status={hints.set.status} width="16%"/>
+      <HintCell value={hints.set_num.value} status={hints.set_num.status} arrow={hints.set_num.arrow} width="8%"/>
+      <HintCell value={hints.price.value}   status={hints.price.status} width="12%"  arrow={hints.price.arrow} />
+      <HintCell value={hints.cardNumber.value} status={hints.cardNumber.status} width="10%"  arrow={hints.cardNumber.arrow} />
+      <HintCell value={hints.rarity.value}     status={hints.rarity.status} width="12%"/>
+      <HintCell value={hints.type.value}     status={hints.type.status} width="7%" />
 
     </div>
   )

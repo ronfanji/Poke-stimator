@@ -15,6 +15,24 @@ function UpperLower() {
     const [problemsLeft, setProblemsLeft] = useState(NUM_PROBLEMS)
     const [gameOver, setGameOver] = useState(false)
 
+    const difficulties = [
+        {
+            title: 'Easy',
+            description: 'Fellow Collectors',
+            start: 'E'
+        },
+        {
+            title: 'Medium',
+            description: 'Vendors or Experienced Hobbyists',
+            start: 'M'
+        },
+        {
+            title: 'Hard',
+            description: 'Only for the Most Dedicated of Traders',
+            start: 'H'
+        },
+    ]
+
     function startGame(diff){
         setDifficulty(diff)
         setScore(0)
@@ -48,14 +66,27 @@ function UpperLower() {
     if (loading) return <p>Loading cards...</p>
 
     if (!difficulty) return (
-        <div>
-            <h1>Upper Lower</h1>
+        <div className="bg-white">
+            <h1 className="text-gray-700">Upper Lower</h1>
+
             <p>You are given two choices of Pokemon product. Select the item that is more expensive.</p>
-            <button onClick={() => startGame('E')}>Easy</button>
-            <button onClick={() => startGame('M')}>Medium</button>
-            <button onClick={() => startGame('H')}>Hard</button>
+        
+            {/* Difficulty Cards */}
+            <div className="grid grid-cols-3 gap-6 px-8 pb-16 max-w-4xl mx-auto mt-6">
+                {difficulties.map(diff => (
+                <div
+                    key={diff.start}
+                    onClick={() => startGame(diff.start)}
+                    className="bg-white hover:bg-red-50 border border-gray-200 hover:border-red-400 rounded-xl p-6 cursor-pointer transition flex flex-col gap-3 shadow-sm"
+                >
+                    <h3 className="text-xl font-bold text-gray-900">{diff.title}</h3>
+                    <p className="text-gray-500 text-sm">{diff.description}</p>
+                </div>
+                ))}
+            </div>
             <footer>
-                <button onClick={() => navigate('/')}>
+            <button onClick={() => navigate('/')} 
+            className="px-7 py-5 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm transition">
                     Back Home
                 </button>
             </footer>
