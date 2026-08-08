@@ -14,7 +14,7 @@ import Cardle from './pages/Cardle'
 function App() {
   const [count, setCount] = useState(0)
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Poke-stimator/">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/card-prices" element={<CardPrices />} />
