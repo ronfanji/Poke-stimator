@@ -69,7 +69,7 @@ function CardPrices() {
       }
     }, [cards])
 
-  if (loading) return <p>Loading...</p>
+  if (loading) return <p className="min-h-screen bg-white">Loading...</p>
 
   const groupedBySet = cards.reduce((acc, card) => {
     if(!acc[card.set]) acc[card.set] = []

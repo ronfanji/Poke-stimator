@@ -63,7 +63,7 @@ function UpperLower() {
         setProblemsLeft(p => p - 1)
     }
 
-    if (loading) return <p>Loading cards...</p>
+    if (loading) return <p className="min-h-screen bg-white">Loading cards...</p>
 
     if (!difficulty) return (
         <div className="min-h-screen bg-white">

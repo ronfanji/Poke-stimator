@@ -74,7 +74,7 @@ function Estimate() {
         setGuess('')
     }
 
-    if (loading) return <p>Loading cards...</p>
+    if (loading) return <p className="min-h-screen bg-white">Loading cards...</p>
 
     if (!range) return (
         <div className="min-h-screen bg-white p-8">
