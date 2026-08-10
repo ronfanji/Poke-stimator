@@ -607,11 +607,30 @@ def fetch_and_reset():
         "limit": 18        
     }
 
+    chaosrising_set_params = {
+        "set": "Chaos Rising",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 18
+    }
+
+    pitchblack_set_params = {
+        "set": "Pitch Black",
+        "sortBy": "price",
+        "sortOrder": "desc",
+        "limit": 19      
+    }
+
+
     time.sleep(10)
     fetch_singles(megaevolution_set_params, "Mega Evolution", 6, 0, set_name="Mega Evolution")
     fetch_singles(phantasmalflames_set_params, "Mega Evolution", 6, 1)
     fetch_singles(ascendedheroes_set_params, "Mega Evolution", 6, 2)
     fetch_singles(perfectorder_set_params, "Mega Evolution", 6, 3)
+    fetch_singles(chaosrising_set_params, "Mega Evolution", 6, 4)
+    fetch_singles(pitchblack_set_params, "Mega Evolution", 6, 5)
+
+    time.sleep(10)
 
     # PROMOS
 
@@ -774,7 +793,18 @@ def fetch_and_reset():
 
 fetch_and_reset()
 
+
 '''
+chaosrising_set_params = {
+    "set": "Chaos Rising",
+    "sortBy": "price",
+    "sortOrder": "desc",
+    "limit": 18
+}
+
+fetch_singles(chaosrising_set_params, "Mega Evolution", 6, 4)
+
+
 paldeaevolved_set_params = {
     "set": "Paldea Evolved",
     "sortBy": "price",
@@ -789,8 +819,6 @@ data = response.json().get("data", [])
 for card in data:
     print(card['ebay']['salesByGrade']['psa10'])
     print(card['ebay']['salesByGrade']['psa10']['marketPrice7Day'])
-
-#fetch_singles(paldeaevolved_set_params, "Scarlet & Violet", era_num=5, set_num=0)
 
 for row in all_rows:
     print(row['name'], row['price'])

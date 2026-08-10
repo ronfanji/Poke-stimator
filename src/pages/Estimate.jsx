@@ -95,7 +95,8 @@ function Estimate() {
             </div>
 
             <footer>
-                <button onClick={() => navigate('/')}>
+                <button onClick={() => navigate('/')} 
+                className="px-7 py-5 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm transition">
                     Back Home
                 </button>
             </footer>

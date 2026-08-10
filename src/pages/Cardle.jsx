@@ -82,7 +82,10 @@ function CardWordle() {
         <p className="text-4xl font-bold text-black">CARDLE</p>
         <p className="text-xl text-gray-500">Guess the mystery card in {MAX_GUESSES} tries</p>
         <div className="ml-auto flex gap-4">
-          <button onClick={() => navigate('/')}>Home</button>
+        <button onClick={() => navigate('/')} 
+            className="px-7 py-5 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm transition">
+                Back Home
+            </button>
         </div>
       </div>
 

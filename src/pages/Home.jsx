@@ -38,7 +38,7 @@ function Home() {
         <h1 className="text-4xl font-bold text-red-400">Poké-stimator</h1>
         <button
           onClick={() => navigate('/card-prices')}
-          className="px-5 py-5 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm transition"
+          className="px-5 py-5 bg-gray-500 border-gray-600 hover:bg-gray-900 hover:border-black text-white rounded-lg text-sm transition"
         >
           View Card Prices
         </button>
