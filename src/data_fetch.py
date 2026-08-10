@@ -659,7 +659,7 @@ def fetch_and_reset():
         "set": "Sword & Shield Promo",
         "sortBy": "price",
         "sortOrder": "desc",
-        "limit": 73,
+        "limit": 77,
     }
     scarletvioletpromo_set_params = {
         "set": "Scarlet & Violet Promo",
