@@ -17,6 +17,29 @@ function Estimate() {
     const [problemsLeft, setProblemsLeft] = useState(NUM_PROBLEMS)
     const [gameOver, setGameOver] = useState(false)
     const seenSet = useRef(new Set())
+    
+    const difficulties = [
+        {
+            title: 'Trainer',
+            description: '$10-100',
+            start: 'L'
+        },
+        {
+            title: 'Team Rocket Grunt',
+            description: '$100-500',
+            start: 'M'
+        },
+        {
+            title: 'Gym Leader',
+            description: '$500-1500',
+            start: 'H'
+        },
+        {
+            title: 'Giovanni',
+            description: '$1500+',
+            start: 'S'
+        },
+    ]
 
     function startGame(r) {
         seenSet.current.clear()
@@ -54,13 +77,23 @@ function Estimate() {
     if (loading) return <p>Loading cards...</p>
 
     if (!range) return (
-        <div>
+        <div className="min-h-screen bg-white p-8">
             <h1>Estimate</h1>
             <p>Guess a percentage of a card's price</p>
-            <button onClick={() => startGame('L')}>Low ($10-100)</button>
-            <button onClick={() => startGame('M')}>Medium ($100-500)</button>
-            <button onClick={() => startGame('H')}>High ($500-1500)</button>
-            <button onClick={() => startGame('S')}>Super High ($1500+)</button>
+
+            <div className="grid grid-cols-4 gap-6 px-8 pb-16 max-w-5xl mx-auto mt-6">
+                {difficulties.map(diff => (
+                <div
+                    key={diff.start}
+                    onClick={() => startGame(diff.start)}
+                    className="bg-white hover:bg-red-50 border border-gray-200 hover:border-red-400 rounded-xl p-6 cursor-pointer transition flex flex-col gap-3 shadow-sm"
+                >
+                    <h3 className="text-xl font-bold text-gray-900">{diff.title}</h3>
+                    <p className="text-gray-500 text-sm">{diff.description}</p>
+                </div>
+                ))}
+            </div>
+
             <footer>
                 <button onClick={() => navigate('/')}>
                     Back Home
@@ -70,15 +103,26 @@ function Estimate() {
     )
 
     if (gameOver) return (
-        <div>
+        <div className="min-h-screen bg-white flex flex-col items-center gap-2">
             <h1>Game Over!</h1>
             <p>Final Score: {Math.round(totalScore / NUM_PROBLEMS)}</p>
-            <button onClick={() => setRange(null)}>Play Again</button>
+
+            <div className="flex flex-col gap-5 items-center">
+                <button onClick={() => setRange(null)}>
+                Play Again
+                </button>
+                <button 
+                    onClick={() => navigate('/')} 
+                    className="px-7 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm transition"
+                    >
+                    Back Home
+                </button>
+            </div>
         </div>
     )
 
     return (
-        <div>
+        <div className="min-h-screen bg-white p-8">
             <h2>Problems Left: {problemsLeft}</h2>
 
         {problem && !result && (

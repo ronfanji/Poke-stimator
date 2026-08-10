@@ -3,6 +3,8 @@ import { useCardData } from '../hooks/useCardData'
 import { generateUpperLower } from '../utils/gameLogic'
 import { useNavigate } from 'react-router-dom'
 
+const MAX_LIVES = 3
+
 function UpperLower() {
     const navigate = useNavigate()
     const { productSorted, pricesSorted, imagesSorted, loading } = useCardData()
@@ -10,18 +12,39 @@ function UpperLower() {
     const [problem, setProblem] = useState(null)
     const [result, setResult] = useState(null)
     const [score, setScore] = useState(0)
+    const [lives, setLives] = useState(MAX_LIVES)
     const [gameOver, setGameOver] = useState(false)
     const [wrongAnswer, setWrong] = useState(false)
+
+    const difficulties = [
+        {
+            title: 'Easy',
+            description: 'Fellow Collectors',
+            start: 'E'
+        },
+        {
+            title: 'Medium',
+            description: 'Experienced Hobbyists',
+            start: 'M'
+        },
+        {
+            title: 'Hard',
+            description: 'Only for the Most Dedicated of Traders',
+            start: 'H'
+        },
+    ]
+
 
     function startGame(diff){
         setDifficulty(diff)
         setScore(0)
         setGameOver(false)
         nextProblem(diff)
+        setLives(MAX_LIVES)
     }
 
     function nextProblem(diff) {
-        if(wrongAnswer){
+        if(lives === 0){
             setGameOver(true)
             return
         }
@@ -36,21 +59,46 @@ function UpperLower() {
     
         setResult({ correct, basePrice, secondPrice })
         if (correct) setScore(s => s + 1)
-        else setWrong(true)
+        else setLives(l => l - 1)
+    }
+
+    function LivesDisplay({ lives, max }) {
+        return (
+          <div className="flex gap-2">
+            {Array.from({ length: max }).map((_, i) => (
+              <span key={i} style={{ fontSize: '28px', opacity: i < lives ? 1 : 0.2 }}>
+                LIFE
+              </span>
+            ))}
+          </div>
+        )
     }
 
     if (loading) return <p>Loading cards...</p>
 
     if (!difficulty) return (
-        <div>
-            <h1>Upper Lower Endless</h1>
+        <div className="min-h-screen bg-white p-8">
+            <h1>High Low Endless</h1>
             <p>You are given two choices of Pokemon product. Select the item that is more expensive!</p>
             <p className = 'mb-4'>Continue playing until you get one wrong!</p>
-            <button onClick={() => startGame('E')}>Easy</button>
-            <button onClick={() => startGame('M')}>Medium</button>
-            <button onClick={() => startGame('H')}>Hard</button>
+
+            {/* Difficulty Cards */}
+            <div className="grid grid-cols-3 gap-6 px-8 pb-16 max-w-4xl mx-auto mt-6">
+                {difficulties.map(diff => (
+                <div
+                    key={diff.start}
+                    onClick={() => startGame(diff.start)}
+                    className="bg-white hover:bg-red-50 border border-gray-200 hover:border-red-400 rounded-xl p-6 cursor-pointer transition flex flex-col gap-3 shadow-sm"
+                >
+                    <h3 className="text-xl font-bold text-gray-900">{diff.title}</h3>
+                    <p className="text-gray-500 text-sm">{diff.description}</p>
+                </div>
+                ))}
+            </div>
+
             <footer>
-                <button onClick={() => navigate('/')}>
+                <button onClick={() => navigate('/')} 
+                className="px-7 py-5 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm transition">
                     Back Home
                 </button>
             </footer>
@@ -58,22 +106,31 @@ function UpperLower() {
     )
 
     if (gameOver) return (
-        <div>
+        <div className="min-h-screen bg-white flex flex-col items-center gap-5">
             <h1>Game Over!</h1>
             <p>Score: {score}</p>
-            <button onClick={() => setDifficulty(null)}>Play Again</button>
+            
+            <div
+                onClick={() => setDifficulty(null)}
+                className="bg-white hover:bg-red-50 border border-gray-200 hover:border-red-400 rounded-xl p-6 cursor-pointer transition flex flex-col gap-3 shadow-sm w-48 mx-auto"
+            >
+                <h3 className="text-xl font-bold text-gray-900">Play Again</h3>
+            </div>
+
             <footer>
-                <button onClick={() => navigate('/')}>
-                    Home
+                <button onClick={() => navigate('/')} 
+                className="px-7 py-5 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm transition">
+                    Back Home
                 </button>
             </footer>
+            
         </div>
     )
   
     return (
-        <div>
+        <div className="min-h-screen bg-white">
             <h2>Score: {score}</h2>
-    
+            <LivesDisplay lives={lives} max={MAX_LIVES} />
             {problem && !result && (
             <div>
                 <p>Which is more expensive?</p>

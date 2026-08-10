@@ -21,7 +21,7 @@
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
-  color-scheme: light;
+  color-scheme: ;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -36,8 +36,8 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
+    --text: #454e5e;
+    --text-h: #21355e;
     --bg: #16171d;
     --border: #2e303a;
     --code-bg: #1f2028;
@@ -116,6 +116,7 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
 
 @layer base {
   button {

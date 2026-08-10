@@ -23,7 +23,7 @@ function UpperLower() {
         },
         {
             title: 'Medium',
-            description: 'Vendors or Experienced Hobbyists',
+            description: 'Experienced Hobbyists',
             start: 'M'
         },
         {
@@ -66,8 +66,8 @@ function UpperLower() {
     if (loading) return <p>Loading cards...</p>
 
     if (!difficulty) return (
-        <div className="bg-white">
-            <h1 className="text-gray-700">Upper Lower</h1>
+        <div className="min-h-screen bg-white">
+            <h1 className="text-gray-700">High Low</h1>
 
             <p>You are given two choices of Pokemon product. Select the item that is more expensive.</p>
         
@@ -85,8 +85,8 @@ function UpperLower() {
                 ))}
             </div>
             <footer>
-            <button onClick={() => navigate('/')} 
-            className="px-7 py-5 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm transition">
+                <button onClick={() => navigate('/')} 
+                className="px-7 py-5 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm transition">
                     Back Home
                 </button>
             </footer>
@@ -94,20 +94,28 @@ function UpperLower() {
     )
 
     if (gameOver) return (
-        <div>
+        <div className="min-h-screen bg-white flex flex-col items-center gap-5">
             <h1>Game Over!</h1>
             <p>Score: {score} / {NUM_PROBLEMS}</p>
-            <button onClick={() => setDifficulty(null)}>Play Again</button>
+
+            <div
+                onClick={() => setDifficulty(null)}
+                className="bg-white hover:bg-red-50 border border-gray-200 hover:border-red-400 rounded-xl p-6 cursor-pointer transition flex flex-col gap-3 shadow-sm w-48 mx-auto"
+            >
+                <h3 className="text-xl font-bold text-gray-900">Play Again</h3>
+            </div>
+
             <footer>
-                <button onClick={() => navigate('/')}>
-                    Home
+                <button onClick={() => navigate('/')} 
+                className="px-7 py-5 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm transition">
+                    Back Home
                 </button>
             </footer>
         </div>
     )
   
     return (
-        <div>
+        <div className="min-h-screen bg-white">
             <h2>Score: {score} | Problems Left: {problemsLeft}</h2>
     
             {problem && !result && (
