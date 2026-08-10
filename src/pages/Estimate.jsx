@@ -79,7 +79,7 @@ function Estimate() {
     if (!range) return (
         <div className="min-h-screen bg-white p-8">
             <h1>Estimate</h1>
-            <p>Guess a percentage of a card's price</p>
+            <p>Guess the value based on a percentage of a card's price</p>
 
             <div className="grid grid-cols-4 gap-6 px-8 pb-16 max-w-5xl mx-auto mt-6">
                 {difficulties.map(diff => (
