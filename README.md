@@ -13,3 +13,12 @@ I fetch card data into my database. React JS then fetches data from this databas
 
 *Estimate:* Simlar to UpperLower, I fetch all products in the database
 *Cardle:* I save every unique attribute of each card into the database as well, as this does not take up more tokens in my API. 
+
+
+In order to implement and run this yourself, simply pull this repository. Then, create a database on Supabase.
+Then use the file called "env_format" as a format for how to structure your .env file. 
+
+VITE_SUPABASE_URL should be the url to the database you created.
+VITE_SUPABASE_PUBLIC_KEY is the publishable key.
+VITE_SUPABASE_SECRET_KEY is the secret key.
+API_KEY is the key to PokemonPriceTracker. Ensure that you are using at least the $10 API tier, as there are API Rate Limits.
