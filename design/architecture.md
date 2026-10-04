@@ -1,9 +1,9 @@
 ```mermaid
 graph TD
 
-    [TCGPlayer/PokemonPriceTracker API] --> [data_fetch.py]
-    [data_fetch.py] --> [Data Cleaning & Normalization]
-    [Data Cleaning & Normalization] --> [Supabase Postgre SQL]
-    [Supabase PostgreSQL] --> [React Frontend]
+    A[TCGPlayer and PokemonPriceTracker API] --> B[data_fetch.py]
+    B[data_fetch.py] --> C[Data Cleaning and Normalization]
+    C[Data Cleaning and Normalization] --> D[Supabase Postgre SQL]
+    D[Supabase PostgreSQL] --> E[React Frontend]
 
 ```
